@@ -10,7 +10,7 @@
   <!-- Force redirect to HTTPS -->
   <script>
     if (
-      !(window.location.host.startsWith("127.0.0.1") || window.location.host.startsWith("localhost") || window.location.protocol === 'file:')
+      !((window.location.host.indexOf("127.0.0.1") === 0) || (window.location.host.indexOf("localhost") === 0) || window.location.protocol === 'file:')
       && (window.location.protocol != "https:")
     ) {
       window.location.protocol = "https:";
@@ -31,6 +31,11 @@
     }
 
     #tree {
+      display: flex;
+      flex: 1;
+    }
+
+    section {
       display: flex;
       flex: 1;
     }
