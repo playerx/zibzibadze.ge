@@ -317,6 +317,9 @@
           var chart = new OrgChart(document.getElementById("tree"), {
             tags,
             enableSearch: true,
+            searchFields: [
+              "name1"
+            ],
             nodeMouseClick: OrgChart.action.none,
             mouseScrool: OrgChart.action.zoom,
             nodeBinding: {
