@@ -186,58 +186,58 @@
         const to5_4 = x + '_to_5_4'
 
         OrgChart.templates[to3_1] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to3_1].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: -65,
-        }
+        OrgChart.templates[to3_1].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -65 }
+        )
 
         OrgChart.templates[to3_2] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to3_2].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: 65,
-        }
+        OrgChart.templates[to3_2].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 65 }
+        )
 
         OrgChart.templates[to4_1] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to4_1].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: -135,
-        }
+        OrgChart.templates[to4_1].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -135 }
+        )
 
         OrgChart.templates[to4_2] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to4_2].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: 0,
-        }
+        OrgChart.templates[to4_2].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 0 }
+        )
 
         OrgChart.templates[to4_3] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to4_3].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: 135,
-        }
+        OrgChart.templates[to4_3].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 135 }
+        )
 
         OrgChart.templates[to5_1] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to5_1].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: -200,
-        }
+        OrgChart.templates[to5_1].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -200 }
+        )
 
         OrgChart.templates[to5_2] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to5_2].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: -65,
-        }
+        OrgChart.templates[to5_2].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: -65 }
+        )
 
         OrgChart.templates[to5_3] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to5_3].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: 65,
-        }
+        OrgChart.templates[to5_3].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 65 }
+        )
 
         OrgChart.templates[to5_4] = Object.assign({}, OrgChart.templates[x]);
-        OrgChart.templates[to5_4].linkAdjuster = {
-          ...OrgChart.templates[x].linkAdjuster,
-          toX: 200,
-        }
+        OrgChart.templates[to5_4].linkAdjuster = Object.assign(
+          OrgChart.templates[x].linkAdjuster,
+          { toX: 200 }
+        )
 
         return [
           to3_1,
@@ -251,7 +251,7 @@
 
       const tags = mutipliedTemplates.map(function (x) {
         return { [x]: { template: x } }
-      }).reduce(function (a, b) { return ({ ...a, ...b }) })
+      }).reduce(function (a, b) { return Object.assign(a, b) })
 
       const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
       // const data = [
@@ -495,12 +495,14 @@
           break
       }
 
-      return {
-        id,
-        pid: parentId,
-        tags: [tag],
-        ...people,
-      }
+      return Object.assign(
+        {
+          id,
+          pid: parentId,
+          tags: [tag],
+        },
+        people
+      )
     }
 
     function concatArray(a, b) {
