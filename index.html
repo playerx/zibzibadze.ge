@@ -30,14 +30,30 @@
       flex-direction: column;
     }
 
-    #tree {
+    section {
       display: flex;
       flex: 1;
     }
 
-    section {
+    section>span {
       display: flex;
       flex: 1;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #tree {
+      flex: 1;
+      display: none;
+    }
+
+    section.loaded>span {
+      display: none;
+    }
+
+    section.loaded>#tree {
+
+      display: flex;
     }
 
     footer {
@@ -62,7 +78,10 @@
 </head>
 
 <body>
-  <div id="tree"></div>
+  <section id="mainSection">
+    <span>Loading...</span>
+    <div id="tree"></div>
+  </section>
   <footer>
     <span>
       Idea By: Alexander Zibzibadze
@@ -324,6 +343,8 @@
       fetch(url)
         .then(function (x) { return x.json() })
         .then(function (data) {
+
+          document.getElementById('mainSection').className = "loaded"
 
           const nodes = data
             .map(function (x) { return mapTreeNode(x, data) })
