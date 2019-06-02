@@ -4,10 +4,61 @@
 <head>
   <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200&display=swap"
+        rel="stylesheet">
+
+  <style>
+    html,
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #tree {
+      display: flex;
+      flex: 1;
+    }
+
+    footer {
+      display: flex;
+      height: 30px;
+      border-top: 1px solid #f4f4f4;
+      align-items: center;
+      font-size: 14px;
+      color: gray;
+      font-weight: 200;
+      padding-left: 20px;
+    }
+
+    footer span {
+      margin-right: 20px;
+    }
+
+    footer span.fill {
+      flex: 1;
+    }
+  </style>
 </head>
 
 <body>
   <div id="tree"></div>
+  <footer>
+    <span>
+      Idea By: Alexander Zibzibadze
+    </span>
+    <span class=fill></span>
+    <span>Zibzibadze Family Tree © 2019 </span>
+    <span class=fill></span>
+    <span>
+      Created By: Ezeki Zibzibadze
+    </span>
+  </footer>
+
   <script>
     window.onload = function () {
 
@@ -167,119 +218,100 @@
         [x]: { template: x }
       })).reduce((a, b) => ({ ...a, ...b }))
 
-      // const nodes2 = [
-      //   { id: "1", tags: ["family_template_2"], name1: "King George VI", name2: "Queen Elizabeth,", title2: "The Queen Mother", img0: "https://balkangraph.com/js/img/f1.png", img1: "https://balkangraph.com/js/img/f2.png" },
-      //   { id: "2", pid: 1, tags: ["family_template_2"], name1: "Prince Philip", name2: "Queen Elizabeth II", title1: "Duke of Edinburgh", img0: "https://balkangraph.com/js/img/f3.png", img1: "https://balkangraph.com/js/img/f5.png" },
-      //   { id: "3", pid: 1, tags: ["family_template_1"], name1: "Princess Margaret", img0: "https://balkangraph.com/js/img/f6.png" },
-      //   { id: "4", pid: 2, tags: ["family_template_4"], name1: "Camila,", name2: "Charles,", name3: "Diana,", title1: "Duchess of Cornwall", title2: "Prince of Wales", title3: "Princess of Wales", img0: "https://balkangraph.com/js/img/f7.png", img1: "https://balkangraph.com/js/img/f8.png", img2: "https://balkangraph.com/js/img/f9.png", img3: "https://balkangraph.com/js/img/f9.png" },
-      //   { id: "5", pid: 2, tags: ["family_template_1"], name1: "Anne", title1: "Princess Royal", img0: "https://balkangraph.com/js/img/f10.png" },
-      //   { id: "6", pid: 2, tags: ["family_template_1"], name1: "Prince Andrew", title1: "Duke of York", img0: "https://balkangraph.com/js/img/f11.png" },
-      //   { id: "7", pid: 2, tags: ["family_template_1"], name1: "Prince Edward", title1: "Earl of Wessex", img0: "https://balkangraph.com/js/img/f12.png" },
-      //   { id: "8", pid: 4, tags: ["family_template_2_to_4_1"], name1: "Catherine,", name2: "Prince William", title1: "Duchess of Cambridge", title2: "Duch of Cambridge", img0: "https://balkangraph.com/js/img/f13.png", img1: "https://balkangraph.com/js/img/f14.png" },
-      //   { id: "9", pid: 4, tags: ["family_template_2_to_4_3"], name1: "Prince Harry", name2: "Meghan Markle", img0: "https://balkangraph.com/js/img/f15.png", img1: "https://balkangraph.com/js/img/f16.png" },
-      //   { id: "10", pid: 8, tags: ["family_template_1"], name1: "Prince George of Cambridge", img0: "https://balkangraph.com/js/img/f17.png" },
-      //   { id: "11", pid: 8, tags: ["family_template_1"], name1: "Prince Charlotte of Cambridge", img0: "https://balkangraph.com/js/img/f18.png" },
-      //   { id: "12", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" },
-      //   { id: "13", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" }
-      // ]
-
-
       const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
-      const data = [
-        {
-          "id": 1,
-          "name": "ეზეკია ზიბზიბაძე",
-          "rels": [{ "name": "ელენა" }]
-        },
+      // const data = [
+      //   {
+      //     "id": 1,
+      //     "name": "ეზეკია ზიბზიბაძე",
+      //     "rels": [{ "name": "ელენა" }]
+      //   },
 
-        {
-          "id": 2,
-          "parentId": 1,
-          "name": "რეზო ზიბზიბაძე",
-          "rels": [{ "name": "ლიანა" }]
-        },
-        {
-          "id": 3,
-          "parentId": 1,
-          "name": "შოთა ზიბზიბაძე",
-          "rels": [{ "name": " " }]
-        },
-        {
-          "id": 4,
-          "parentId": 1,
-          "name": "ვაჟა ზიბზიბაძე",
-          "rels": [
-            { "name": "ფაციკო" },
-            { "name": "ჟუჟუნა ირემაშვილი" },
-          ]
-        },
+      //   {
+      //     "id": 2,
+      //     "parentId": 1,
+      //     "name": "რეზო ზიბზიბაძე",
+      //     "rels": [{ "name": "ლიანა" }]
+      //   },
+      //   {
+      //     "id": 3,
+      //     "parentId": 1,
+      //     "name": "შოთა ზიბზიბაძე",
+      //     "rels": [{ "name": " " }]
+      //   },
+      //   {
+      //     "id": 4,
+      //     "parentId": 1,
+      //     "name": "ვაჟა ზიბზიბაძე",
+      //     "rels": [
+      //       { "name": "ფაციკო" },
+      //       { "name": "ჟუჟუნა ირემაშვილი" },
+      //     ]
+      //   },
 
-        {
-          "id": 5,
-          "parentId": 2,
-          "name": "X ზიბზიბაძე",
-        },
-        {
-          "id": 6,
-          "parentId": 2,
-          "isFemale": true,
-          "name": "მარინა ზიბზიბაძე",
-        },
+      //   {
+      //     "id": 5,
+      //     "parentId": 2,
+      //     "name": "X ზიბზიბაძე",
+      //   },
+      //   {
+      //     "id": 6,
+      //     "parentId": 2,
+      //     "isFemale": true,
+      //     "name": "მარინა ზიბზიბაძე",
+      //   },
 
-        {
-          "id": 7,
-          "parentId": 3,
-          "name": "საშა ზიბზიბაძე",
-          "rels": [{ "name": "კარინა" }]
-        },
+      //   {
+      //     "id": 7,
+      //     "parentId": 3,
+      //     "name": "საშა ზიბზიბაძე",
+      //     "rels": [{ "name": "კარინა" }]
+      //   },
 
-        {
-          "id": 8,
-          "parentId": 4,
-          "parentRelId": 1,
-          "name": "თემური ზიბზიბაძე",
-        },
-        {
-          "id": 9,
-          "parentId": 4,
-          "parentRelId": 1,
-          "name": "ნანა ზიბზიბაძე",
-        },
-        {
-          "id": 10,
-          "parentId": 4,
-          "parentRelId": 2,
-          "name": "ეზეკი ზიბზიბაძე",
-          "rels": [{ "name": "სალომე მინდიაშვილი" }]
-        },
-        {
-          "id": 11,
-          "parentId": 4,
-          "parentRelId": 2,
-          "name": "ელენე ზიბზიბაძე"
-        },
+      //   {
+      //     "id": 8,
+      //     "parentId": 4,
+      //     "parentRelId": 1,
+      //     "name": "თემური ზიბზიბაძე",
+      //   },
+      //   {
+      //     "id": 9,
+      //     "parentId": 4,
+      //     "parentRelId": 1,
+      //     "name": "ნანა ზიბზიბაძე",
+      //   },
+      //   {
+      //     "id": 10,
+      //     "parentId": 4,
+      //     "parentRelId": 2,
+      //     "name": "ეზეკი ზიბზიბაძე",
+      //     "rels": [{ "name": "სალომე მინდიაშვილი" }]
+      //   },
+      //   {
+      //     "id": 11,
+      //     "parentId": 4,
+      //     "parentRelId": 2,
+      //     "name": "ელენე ზიბზიბაძე"
+      //   },
 
-        {
-          "id": 12,
-          "parentId": 7,
-          "name": "ალექსანდრე ზიბზიბაძე",
-        },
-        {
-          "id": 13,
-          "parentId": 7,
-          "name": "შოთა ზიბზიბაძე"
-        },
-      ]
+      //   {
+      //     "id": 12,
+      //     "parentId": 7,
+      //     "name": "ალექსანდრე ზიბზიბაძე",
+      //   },
+      //   {
+      //     "id": 13,
+      //     "parentId": 7,
+      //     "name": "შოთა ზიბზიბაძე"
+      //   },
+      // ]
 
       fetch(url)
         .then(x => x.json())
-        .then(data2 => {
+        .then(data => {
 
           const nodes = data
             .map(x => mapTreeNode(x, data))
             .filter(x => !!x) // ignore nulls (rels > 4)
-
-          console.log(nodes)
 
           // Create chart
           var chart = new OrgChart(document.getElementById("tree"), {
