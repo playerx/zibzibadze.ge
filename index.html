@@ -154,7 +154,7 @@
       ]
 
 
-      const mutipliedTemplates = templates.map(x => {
+      const mutipliedTemplates = templates.map(function (x) {
 
         const to3_1 = `${x}_to_3_1`
         const to3_2 = `${x}_to_3_2`
@@ -230,9 +230,9 @@
 
       }).reduce(concatArray, templates)
 
-      const tags = mutipliedTemplates.map(x => ({
-        [x]: { template: x }
-      })).reduce((a, b) => ({ ...a, ...b }))
+      const tags = mutipliedTemplates.map(function (x) {
+        return { [x]: { template: x } }
+      }).reduce(function (a, b) { return ({ ...a, ...b }) })
 
       const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
       // const data = [
@@ -322,12 +322,12 @@
       // ]
 
       fetch(url)
-        .then(x => x.json())
-        .then(data => {
+        .then(function (x) { return x.json() })
+        .then(function (data) {
 
           const nodes = data
-            .map(x => mapTreeNode(x, data))
-            .filter(x => !!x) // ignore nulls (rels > 4)
+            .map(function (x) { return mapTreeNode(x, data) })
+            .filter(function (x) { return !!x }) // ignore nulls (rels > 4)
 
           // Create chart
           var chart = new OrgChart(document.getElementById("tree"), {
@@ -358,7 +358,7 @@
             nodes,
           })
         })
-        .catch(err => {
+        .catch(function (err) {
           console.warn(err)
           alert(' Problem loading data: ' + err.message)
         })
@@ -373,7 +373,7 @@
       let parentLength
 
       if (parentId) {
-        const parent = allNodes.find(x => x.id === parentId)
+        const parent = allNodes.find(function (x) { return x.id === parentId })
         if (parent) {
           parentLength = parent.rels
             ? (parent.rels.length + 1)
