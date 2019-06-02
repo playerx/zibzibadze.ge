@@ -1,32 +1,39 @@
-{
-  "name": "King George VI",
-  "imageUrl": "",
-  "rels": [
-    {
-      "name": "Queen Elizabeth",
-      "imageUrl": "",
-      "children": [
-        {
-          "name": "Queen Elizabeth II",
-          "imageUrl": "",
-          "rels": [
-            {
-              "name": "Someone",
-              "imageUrl": "",
-              "children": [
-                {
-                  "name": "Prince Philip",
-                  "imageUrl": ""
-                },
-                {
-                  "name": "Princess Margaret",
-                  "imageUrl": ""
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "King 2 George VI",
+    "imageUrl": "",
+    "rels": [
+      {
+        "name": "Wife",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "parentId": 1,
+    "parentRelId": 1,
+    "name": "Queen Elizabeth II",
+    "imageUrl": "",
+    "isFemale": true,
+    "rels": [
+      {
+        "name": "Someone",
+        "imageUrl": ""
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "parentId": 2,
+    "name": "Prince Philip",
+    "imageUrl": ""
+  },
+  {
+    "id": 4,
+    "parentId": 2,
+    "name": "Princess Margaret",
+    "imageUrl": ""
+  }
+]

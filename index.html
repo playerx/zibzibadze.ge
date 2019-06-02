@@ -1,46 +1,14 @@
+<!DOCTYPE html>
 <html>
 
 <head>
   <script src="https://balkangraph.com/js/latest/OrgChart.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 </head>
 
 <body>
   <div id="tree"></div>
   <script>
-    const data = {
-      name: 'King George VI',
-      imageUrl: '',
-      rels: [
-        {
-          name: 'Queen Elizabeth',
-          imageUrl: '',
-          children: [
-            {
-              name: 'Queen Elizabeth II',
-              imageUrl: '',
-              rels: [
-                {
-                  name: 'Someone',
-                  imageUrl: '',
-                  children: [
-                    {
-                      name: 'Prince Philip',
-                      imageUrl: '',
-                    },
-                    {
-                      name: 'Princess Margaret',
-                      imageUrl: '',
-                    }
-                  ]
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    }
-
     window.onload = function () {
 
       // Prepare templates
@@ -199,65 +167,128 @@
         [x]: { template: x }
       })).reduce((a, b) => ({ ...a, ...b }))
 
-      const nodes2 = [
-        { id: "1", tags: ["family_template_2"], name1: "King George VI", name2: "Queen Elizabeth,", title2: "The Queen Mother", img0: "https://balkangraph.com/js/img/f1.png", img1: "https://balkangraph.com/js/img/f2.png" },
-        { id: "2", pid: 1, tags: ["family_template_2"], name1: "Prince Philip", name2: "Queen Elizabeth II", title1: "Duke of Edinburgh", img0: "https://balkangraph.com/js/img/f3.png", img1: "https://balkangraph.com/js/img/f5.png" },
-        { id: "3", pid: 1, tags: ["family_template_1"], name1: "Princess Margaret", img0: "https://balkangraph.com/js/img/f6.png" },
-        { id: "4", pid: 2, tags: ["family_template_4"], name1: "Camila,", name2: "Charles,", name3: "Diana,", title1: "Duchess of Cornwall", title2: "Prince of Wales", title3: "Princess of Wales", img0: "https://balkangraph.com/js/img/f7.png", img1: "https://balkangraph.com/js/img/f8.png", img2: "https://balkangraph.com/js/img/f9.png", img3: "https://balkangraph.com/js/img/f9.png" },
-        { id: "5", pid: 2, tags: ["family_template_1"], name1: "Anne", title1: "Princess Royal", img0: "https://balkangraph.com/js/img/f10.png" },
-        { id: "6", pid: 2, tags: ["family_template_1"], name1: "Prince Andrew", title1: "Duke of York", img0: "https://balkangraph.com/js/img/f11.png" },
-        { id: "7", pid: 2, tags: ["family_template_1"], name1: "Prince Edward", title1: "Earl of Wessex", img0: "https://balkangraph.com/js/img/f12.png" },
-        { id: "8", pid: 4, tags: ["family_template_2_to_4_1"], name1: "Catherine,", name2: "Prince William", title1: "Duchess of Cambridge", title2: "Duch of Cambridge", img0: "https://balkangraph.com/js/img/f13.png", img1: "https://balkangraph.com/js/img/f14.png" },
-        { id: "9", pid: 4, tags: ["family_template_2_to_4_3"], name1: "Prince Harry", name2: "Meghan Markle", img0: "https://balkangraph.com/js/img/f15.png", img1: "https://balkangraph.com/js/img/f16.png" },
-        { id: "10", pid: 8, tags: ["family_template_1"], name1: "Prince George of Cambridge", img0: "https://balkangraph.com/js/img/f17.png" },
-        { id: "11", pid: 8, tags: ["family_template_1"], name1: "Prince Charlotte of Cambridge", img0: "https://balkangraph.com/js/img/f18.png" },
-        { id: "12", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" },
-        { id: "13", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" }
-      ]
+      // const nodes2 = [
+      //   { id: "1", tags: ["family_template_2"], name1: "King George VI", name2: "Queen Elizabeth,", title2: "The Queen Mother", img0: "https://balkangraph.com/js/img/f1.png", img1: "https://balkangraph.com/js/img/f2.png" },
+      //   { id: "2", pid: 1, tags: ["family_template_2"], name1: "Prince Philip", name2: "Queen Elizabeth II", title1: "Duke of Edinburgh", img0: "https://balkangraph.com/js/img/f3.png", img1: "https://balkangraph.com/js/img/f5.png" },
+      //   { id: "3", pid: 1, tags: ["family_template_1"], name1: "Princess Margaret", img0: "https://balkangraph.com/js/img/f6.png" },
+      //   { id: "4", pid: 2, tags: ["family_template_4"], name1: "Camila,", name2: "Charles,", name3: "Diana,", title1: "Duchess of Cornwall", title2: "Prince of Wales", title3: "Princess of Wales", img0: "https://balkangraph.com/js/img/f7.png", img1: "https://balkangraph.com/js/img/f8.png", img2: "https://balkangraph.com/js/img/f9.png", img3: "https://balkangraph.com/js/img/f9.png" },
+      //   { id: "5", pid: 2, tags: ["family_template_1"], name1: "Anne", title1: "Princess Royal", img0: "https://balkangraph.com/js/img/f10.png" },
+      //   { id: "6", pid: 2, tags: ["family_template_1"], name1: "Prince Andrew", title1: "Duke of York", img0: "https://balkangraph.com/js/img/f11.png" },
+      //   { id: "7", pid: 2, tags: ["family_template_1"], name1: "Prince Edward", title1: "Earl of Wessex", img0: "https://balkangraph.com/js/img/f12.png" },
+      //   { id: "8", pid: 4, tags: ["family_template_2_to_4_1"], name1: "Catherine,", name2: "Prince William", title1: "Duchess of Cambridge", title2: "Duch of Cambridge", img0: "https://balkangraph.com/js/img/f13.png", img1: "https://balkangraph.com/js/img/f14.png" },
+      //   { id: "9", pid: 4, tags: ["family_template_2_to_4_3"], name1: "Prince Harry", name2: "Meghan Markle", img0: "https://balkangraph.com/js/img/f15.png", img1: "https://balkangraph.com/js/img/f16.png" },
+      //   { id: "10", pid: 8, tags: ["family_template_1"], name1: "Prince George of Cambridge", img0: "https://balkangraph.com/js/img/f17.png" },
+      //   { id: "11", pid: 8, tags: ["family_template_1"], name1: "Prince Charlotte of Cambridge", img0: "https://balkangraph.com/js/img/f18.png" },
+      //   { id: "12", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" },
+      //   { id: "13", pid: 8, tags: ["family_template_1"], name1: "Prince Louis of Cambridge", img0: "https://balkangraph.com/js/img/f19.png" }
+      // ]
 
 
-      // Transform nodes
-      const nodes = mapTree(data)
+      const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
+      // const data = [
+      //   {
+      //     "id": 1,
+      //     "name": "King 2 George VI",
+      //     "imageUrl": "",
+      //     "rels": [
+      //       {
+      //         "name": "Wife",
+      //         "imageUrl": ""
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "id": 2,
+      //     "parentId": 1,
+      //     "parentRelId": 1,
+      //     "name": "Queen Elizabeth II",
+      //     "imageUrl": "",
+      //     "isFemale": true,
+      //     "rels": [
+      //       {
+      //         "name": "Someone",
+      //         "imageUrl": ""
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     "id": 3,
+      //     "parentId": 2,
+      //     "name": "Prince Philip",
+      //     "imageUrl": ""
+      //   },
+      //   {
+      //     "id": 4,
+      //     "parentId": 2,
+      //     "name": "Princess Margaret",
+      //     "imageUrl": ""
+      //   }
+      // ]
 
-      console.log(nodes)
+      fetch(url)
+        .then(x => x.json())
+        .then(data => {
 
-      // Create chart
-      var chart = new OrgChart(document.getElementById("tree"), {
-        tags,
-        enableSearch: true,
-        nodeMouseClick: OrgChart.action.none,
-        mouseScrool: OrgChart.action.zoom,
-        nodeBinding: {
-          name_1: "name1",
-          name_2: "name2",
-          name_3: "name3",
-          name_4: "name4",
-          name_5: "name5",
-          title_1: "title1",
-          title_2: "title2",
-          title_3: "title3",
-          title_4: "title4",
-          title_5: "title5",
-          img_0: "img1",
-          img_1: "img2",
-          img_2: "img3",
-          img_3: "img4",
-          img_4: "img5",
-        },
-        nodes,
-      })
+          const nodes = data
+            .map(x => mapTreeNode(x, data))
+            .filter(x => !!x) // ignore nulls (rels > 4)
+
+          console.log(nodes)
+
+          // Create chart
+          var chart = new OrgChart(document.getElementById("tree"), {
+            tags,
+            enableSearch: true,
+            nodeMouseClick: OrgChart.action.none,
+            mouseScrool: OrgChart.action.zoom,
+            nodeBinding: {
+              name_1: "name1",
+              name_2: "name2",
+              name_3: "name3",
+              name_4: "name4",
+              name_5: "name5",
+              title_1: "title1",
+              title_2: "title2",
+              title_3: "title3",
+              title_4: "title4",
+              title_5: "title5",
+              img_0: "img1",
+              img_1: "img2",
+              img_2: "img3",
+              img_3: "img4",
+              img_4: "img5",
+            },
+            nodes,
+          })
+        })
+        .catch(err => alert(' Problem loading data: ' + err.message))
     }
 
-    function mapTree(node, parentId = undefined, parentLength = undefined, relId = undefined) {
+    function mapTreeNode(node, allNodes) {
+
+      // set variables
+      const parentId = node.parentId
+      const relId = node.parentRelId
       const hasRels = node.rels && node.rels.length
+      let parentLength
+
+      if (parentId) {
+        const parent = allNodes.find(x => x.id === parentId)
+        if (parent) {
+          parentLength = parent.rels.length + 1
+        }
+      }
+
+
+      // start analyze
       if (!hasRels) {
-        return [{
+        return {
           id: getNextId(),
           pid: parentId,
-          tags: ["family_template_1"],
+          tags: ['family_template_1'],
           name1: node.name,
-          img1: node.imageUrl,
-        }]
+          img1: getImageUrl(node.imageUrl, !node.isFemale),
+        }
       }
 
       if (node.rels.length > 4) {
@@ -268,15 +299,8 @@
 
       const id = getNextId()
 
-      const childItems = node.rels.map(
-        (x, i) => (x.children && x.children.length)
-          ? x.children.map(c => mapTree(c, id, node.rels.length + 1, i + 1)).reduce(concatArray, [])
-          : []
-      ).reduce(concatArray, [])
-
       const tag = `family_template_${node.rels.length + 1}` +
         ((parentLength > 2) ? `_to_${parentLength}_${relId}` : '')
-
 
       let people = {}
 
@@ -284,72 +308,79 @@
         case 1:
           people = {
             name1: node.name,
-            img1: node.imageUrl,
+            img1: getImageUrl(node.imageUrl, node.isFemale),
 
             name2: node.rels[0].name,
-            img2: node.rels[0].imageUrl,
+            img2: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
           }
           break
 
         case 2:
           people = {
             name1: node.rels[0].name,
-            img1: node.rels[0].imageUrl,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
 
             name2: node.name,
-            img2: node.imageUrl,
+            img2: getImageUrl(node.imageUrl, node.isFemale),
 
             name3: node.rels[1].name,
-            img3: node.rels[1].imageUrl,
+            img3: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
           }
           break
 
         case 3:
           people = {
             name1: node.rels[0].name,
-            img1: node.rels[0].imageUrl,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
 
             name2: node.name,
-            img2: node.imageUrl,
+            img2: getImageUrl(node.imageUrl, node.isFemale),
 
             name3: node.rels[1].name,
-            img3: node.rels[1].imageUrl,
+            img3: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
 
             name4: node.rels[2].name,
-            img4: node.rels[2].imageUrl,
+            img4: getImageUrl(node.rels[2].imageUrl, !node.isFemale),
           }
           break
 
         case 4:
           people = {
             name1: node.rels[0].name,
-            img1: node.rels[0].imageUrl,
+            img1: getImageUrl(node.rels[0].imageUrl, !node.isFemale),
 
             name2: node.rels[1].name,
-            img2: node.rels[1].imageUrl,
+            img2: getImageUrl(node.rels[1].imageUrl, !node.isFemale),
 
             name3: node.name,
-            img3: node.imageUrl,
+            img3: getImageUrl(node.imageUrl, node.isFemale),
 
             name4: node.rels[2].name,
-            img4: node.rels[2].imageUrl,
+            img4: getImageUrl(node.rels[2].imageUrl, !node.isFemale),
 
             name5: node.rels[3].name,
-            img5: node.rels[3].imageUrl,
+            img5: getImageUrl(node.rels[3].imageUrl, !node.isFemale),
           }
           break
       }
 
-      return [{
+      return {
         id,
         pid: parentId,
         tags: [tag],
         ...people,
-      }].concat(childItems)
+      }
     }
 
     function concatArray(a, b) {
       return a.concat(b)
+    }
+
+    function getImageUrl(imageUrl, isFemale) {
+      return imageUrl || (isFemale
+        ? './images/default/female.jpg'
+        : './images/default/male.gif'
+      )
     }
 
     lastId = 1
