@@ -1,0 +1,32 @@
+{
+  "name": "King George VI",
+  "imageUrl": "",
+  "rels": [
+    {
+      "name": "Queen Elizabeth",
+      "imageUrl": "",
+      "children": [
+        {
+          "name": "Queen Elizabeth II",
+          "imageUrl": "",
+          "rels": [
+            {
+              "name": "Someone",
+              "imageUrl": "",
+              "children": [
+                {
+                  "name": "Prince Philip",
+                  "imageUrl": ""
+                },
+                {
+                  "name": "Princess Margaret",
+                  "imageUrl": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
