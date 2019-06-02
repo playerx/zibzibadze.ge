@@ -175,15 +175,15 @@
 
       const mutipliedTemplates = templates.map(function (x) {
 
-        const to3_1 = `${x}_to_3_1`
-        const to3_2 = `${x}_to_3_2`
-        const to4_1 = `${x}_to_4_1`
-        const to4_2 = `${x}_to_4_2`
-        const to4_3 = `${x}_to_4_3`
-        const to5_1 = `${x}_to_5_1`
-        const to5_2 = `${x}_to_5_2`
-        const to5_3 = `${x}_to_5_3`
-        const to5_4 = `${x}_to_5_4`
+        const to3_1 = x + '_to_3_1'
+        const to3_2 = x + '_to_3_2'
+        const to4_1 = x + '_to_4_1'
+        const to4_2 = x + '_to_4_2'
+        const to4_3 = x + '_to_4_3'
+        const to5_1 = x + '_to_5_1'
+        const to5_2 = x + '_to_5_2'
+        const to5_3 = x + '_to_5_3'
+        const to5_4 = x + '_to_5_4'
 
         OrgChart.templates[to3_1] = Object.assign({}, OrgChart.templates[x]);
         OrgChart.templates[to3_1].linkAdjuster = {
@@ -406,7 +406,7 @@
       // start analyze
       if (!hasRels) {
         const tag1 = 'family_template_1' + ((parentLength > 2)
-          ? `_to_${parentLength}_${relId}`
+          ? '_to_' + parentLength + '_' + relId
           : ''
         )
 
@@ -427,9 +427,9 @@
 
       const id = getNextId()
 
-      const tag = `family_template_${node.rels.length + 1}` +
+      const tag = 'family_template_' + (node.rels.length + 1) +
         ((parentLength > 2)
-          ? `_to_${parentLength}_${relId}`
+          ? ('_to_' + parentLength + '_' + relId)
           : ''
         )
 
