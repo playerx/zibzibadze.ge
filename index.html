@@ -185,49 +185,95 @@
 
 
       const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
-      // const data = [
-      //   {
-      //     "id": 1,
-      //     "name": "King 2 George VI",
-      //     "imageUrl": "",
-      //     "rels": [
-      //       {
-      //         "name": "Wife",
-      //         "imageUrl": ""
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     "id": 2,
-      //     "parentId": 1,
-      //     "parentRelId": 1,
-      //     "name": "Queen Elizabeth II",
-      //     "imageUrl": "",
-      //     "isFemale": true,
-      //     "rels": [
-      //       {
-      //         "name": "Someone",
-      //         "imageUrl": ""
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     "id": 3,
-      //     "parentId": 2,
-      //     "name": "Prince Philip",
-      //     "imageUrl": ""
-      //   },
-      //   {
-      //     "id": 4,
-      //     "parentId": 2,
-      //     "name": "Princess Margaret",
-      //     "imageUrl": ""
-      //   }
-      // ]
+      const data = [
+        {
+          "id": 1,
+          "name": "ეზეკია ზიბზიბაძე",
+          "rels": [{ "name": "ელენა" }]
+        },
+
+        {
+          "id": 2,
+          "parentId": 1,
+          "name": "რეზო ზიბზიბაძე",
+          "rels": [{ "name": "ლიანა" }]
+        },
+        {
+          "id": 3,
+          "parentId": 1,
+          "name": "შოთა ზიბზიბაძე",
+          "rels": [{ "name": " " }]
+        },
+        {
+          "id": 4,
+          "parentId": 1,
+          "name": "ვაჟა ზიბზიბაძე",
+          "rels": [
+            { "name": "ფაციკო" },
+            { "name": "ჟუჟუნა ირემაშვილი" },
+          ]
+        },
+
+        {
+          "id": 5,
+          "parentId": 2,
+          "name": "X ზიბზიბაძე",
+        },
+        {
+          "id": 6,
+          "parentId": 2,
+          "isFemale": true,
+          "name": "მარინა ზიბზიბაძე",
+        },
+
+        {
+          "id": 7,
+          "parentId": 3,
+          "name": "საშა ზიბზიბაძე",
+          "rels": [{ "name": "კარინა" }]
+        },
+
+        {
+          "id": 8,
+          "parentId": 4,
+          "parentRelId": 1,
+          "name": "თემური ზიბზიბაძე",
+        },
+        {
+          "id": 9,
+          "parentId": 4,
+          "parentRelId": 1,
+          "name": "ნანა ზიბზიბაძე",
+        },
+        {
+          "id": 10,
+          "parentId": 4,
+          "parentRelId": 2,
+          "name": "ეზეკი ზიბზიბაძე",
+          "rels": [{ "name": "სალომე მინდიაშვილი" }]
+        },
+        {
+          "id": 11,
+          "parentId": 4,
+          "parentRelId": 2,
+          "name": "ელენე ზიბზიბაძე"
+        },
+
+        {
+          "id": 12,
+          "parentId": 7,
+          "name": "ალექსანდრე ზიბზიბაძე",
+        },
+        {
+          "id": 13,
+          "parentId": 7,
+          "name": "შოთა ზიბზიბაძე"
+        },
+      ]
 
       fetch(url)
         .then(x => x.json())
-        .then(data => {
+        .then(data2 => {
 
           const nodes = data
             .map(x => mapTreeNode(x, data))
@@ -261,33 +307,45 @@
             nodes,
           })
         })
-        .catch(err => alert(' Problem loading data: ' + err.message))
+        .catch(err => {
+          console.warn(err)
+          alert(' Problem loading data: ' + err.message)
+        })
     }
 
     function mapTreeNode(node, allNodes) {
 
       // set variables
       const parentId = node.parentId
-      const relId = node.parentRelId
+      const relId = node.parentRelId || 1
       const hasRels = node.rels && node.rels.length
       let parentLength
 
       if (parentId) {
         const parent = allNodes.find(x => x.id === parentId)
         if (parent) {
-          parentLength = parent.rels.length + 1
+          parentLength = parent.rels
+            ? (parent.rels.length + 1)
+            : 1
+
+          console.log(parent, parentLength, relId)
         }
       }
 
 
       // start analyze
       if (!hasRels) {
+        const tag1 = 'family_template_1' + ((parentLength > 2)
+          ? `_to_${parentLength}_${relId}`
+          : ''
+        )
+
         return {
           id: getNextId(),
           pid: parentId,
-          tags: ['family_template_1'],
+          tags: [tag1],
           name1: node.name,
-          img1: getImageUrl(node.imageUrl, !node.isFemale),
+          img1: getImageUrl(node.imageUrl, node.isFemale),
         }
       }
 
@@ -300,7 +358,10 @@
       const id = getNextId()
 
       const tag = `family_template_${node.rels.length + 1}` +
-        ((parentLength > 2) ? `_to_${parentLength}_${relId}` : '')
+        ((parentLength > 2)
+          ? `_to_${parentLength}_${relId}`
+          : ''
+        )
 
       let people = {}
 
