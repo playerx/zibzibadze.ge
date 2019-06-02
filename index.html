@@ -250,7 +250,7 @@
       }).reduce(concatArray, templates)
 
       const tags = mutipliedTemplates.map(function (x) {
-        return { [x]: { template: x } }
+        return { [x.toString()]: { template: x } }
       }).reduce(function (a, b) { return Object.assign(a, b) })
 
       const url = 'https://raw.githubusercontent.com/playerx/zibzibadze.ge/master/data.json'
