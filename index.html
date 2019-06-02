@@ -7,6 +7,17 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:200&display=swap"
         rel="stylesheet">
 
+  <!-- Force redirect to HTTPS -->
+  <script>
+    if (
+      !(window.location.host.startsWith("127.0.0.1") || window.location.host.startsWith("localhost") || window.location.protocol === 'file:')
+      && (window.location.protocol != "https:")
+    ) {
+      window.location.protocol = "https:";
+    }
+  </script>
+
+  <!-- Styles -->
   <style>
     html,
     body {
@@ -26,7 +37,7 @@
 
     footer {
       display: flex;
-      height: 30px;
+      min-height: 30px;
       border-top: 1px solid #f4f4f4;
       align-items: center;
       font-size: 14px;
@@ -362,8 +373,6 @@
           parentLength = parent.rels
             ? (parent.rels.length + 1)
             : 1
-
-          console.log(parent, parentLength, relId)
         }
       }
 
