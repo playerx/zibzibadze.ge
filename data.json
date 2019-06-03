@@ -73,7 +73,12 @@
     "parentId": 4,
     "parentRelId": 1,
     "isFemale": true,
-    "name": "ნანა ზიბზიბაძე"
+    "name": "ნანა ზიბზიბაძე",
+    "rels": [
+      {
+        "name": "სოსო ჩახვაშვილი"
+      }
+     ]
   },
   {
     "id": 10,
@@ -109,5 +114,11 @@
     "id": 14,
     "parentId": 3,
     "name": "სერიოჟა ზიბზიბაძე"
+  },
+  {
+    "id": 15,
+    "parentId": 9,
+    "isFemale": true,
+    "name": "გიორგი ჩახვაშვილი"
   }
 ]
