@@ -9,7 +9,7 @@ Used [Angular Commit Message Guideline](https://github.com/angular/angular/blob/
 
 ## Data Structure
 sample:
-```json
+```js
 {
     // Unique Id
     "id": 10,
