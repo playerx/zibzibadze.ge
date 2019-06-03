@@ -32,7 +32,7 @@ sample:
     // OPTIONAL, facebook profile url
     "facebookUrl": "",
 
-    // Relations
+    // OPTIONAL, Relations
     "rels": [
         {
             "name": "Name Surename",
@@ -45,3 +45,7 @@ sample:
 ## Supported social links
 * Toptal - `toptalUrl`
 * Facebook - `facebookUrl`
+
+
+## Limitations
+* Currently there is one limitation, man (or woman) can have registered max 4 relations :)
