@@ -355,6 +355,113 @@
         .then(function (x) { return x.json() })
         .then(function (data) {
 
+
+          data = [
+            {
+              "id": 1,
+              "name": "ეზეკია ზიბზიბაძე",
+              "rels": [
+                {
+                  "name": "ელენა"
+                }
+              ]
+            },
+            {
+              "id": 2,
+              "parentId": 1,
+              "name": "რეზო ზიბზიბაძე",
+              "rels": [
+                {
+                  "name": "ლიანა"
+                }
+              ]
+            },
+            {
+              "id": 3,
+              "parentId": 1,
+              "name": "შოთა ზიბზიბაძე",
+              "rels": [
+                {
+                  "name": " "
+                }
+              ]
+            },
+            {
+              "id": 4,
+              "parentId": 1,
+              "name": "ვაჟა ზიბზიბაძე",
+              "rels": [
+                {
+                  "name": "ფაციკო"
+                },
+                {
+                  "name": "ჟუჟუნა ირემაშვილი"
+                }
+              ]
+            },
+            {
+              "id": 5,
+              "parentId": 2,
+              "name": "რამაზი ზიბზიბაძე"
+            },
+            {
+              "id": 6,
+              "parentId": 2,
+              "isFemale": true,
+              "name": "მარინა ზიბზიბაძე"
+            },
+            {
+              "id": 7,
+              "parentId": 3,
+              "name": "საშა ზიბზიბაძე",
+              "rels": [
+                {
+                  "name": "კარინა"
+                }
+              ]
+            },
+            {
+              "id": 8,
+              "parentId": 4,
+              "parentRelId": 1,
+              "name": "თემური ზიბზიბაძე"
+            },
+            {
+              "id": 9,
+              "parentId": 4,
+              "parentRelId": 1,
+              "name": "ნანა ზიბზიბაძე"
+            },
+            {
+              "id": 10,
+              "parentId": 4,
+              "parentRelId": 2,
+              "name": "ეზეკი ზიბზიბაძე",
+              "imageUrl": "./images/people/ezeki-zibzibadze.jpg",
+              "rels": [
+                {
+                  "name": "სალომე მინდიაშვილი"
+                }
+              ]
+            },
+            {
+              "id": 11,
+              "parentId": 4,
+              "parentRelId": 2,
+              "name": "ელენე ზიბზიბაძე"
+            },
+            {
+              "id": 12,
+              "parentId": 7,
+              "name": "ალექსანდრე ზიბზიბაძე"
+            },
+            {
+              "id": 13,
+              "parentId": 7,
+              "name": "შოთა ზიბზიბაძე"
+            }
+          ]
+
           document.getElementById('mainSection').className = "loaded"
 
           const nodes = data
@@ -521,6 +628,7 @@
     }
 
     function getImageUrl(imageUrl, isFemale) {
+      console.log(imageUrl)
       return imageUrl || (isFemale
         ? './images/default/female.jpg'
         : './images/default/male.gif'
