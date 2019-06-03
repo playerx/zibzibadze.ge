@@ -115,6 +115,9 @@
       OrgChart.templates.family_template_1.title_3 = '<text class="title_3" style="font-size: 12px;" fill="#aeaeae" x="370" y="120" text-anchor="middle">{val}</text>';
       OrgChart.templates.family_template_1.title_4 = '<text class="title_4" style="font-size: 12px;" fill="#aeaeae" x="370" y="120" text-anchor="middle">{val}</text>';
       OrgChart.templates.family_template_1.img_0 = '<clipPath id="{randId}"><circle cx="100" cy="45" r="40"></circle></clipPath><circle stroke-width="3" fill="none" stroke="#039BE5" cx="100" cy="45" r="45"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="{val}" x="60" y="5"  width="80" height="80"></image>';
+      OrgChart.templates.family_template_1.badge_toptal = '<clipPath id="{randId}"><circle cx="132" cy="76" stroke-width="1" r="16"></circle></clipPath><circle stroke-width="1" fill="#cacaca" stroke="#cacaca" cx="132" cy="76" r="16"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="./images/organizations/toptal.jpg" onclick="openPage(\'{val}\')" x="114" y="58" width="35" height="35" style="cursor: pointer;"></image>'
+      OrgChart.templates.family_template_1.badge_facebook = '<clipPath id="{randId}"><circle cx="132" cy="76" stroke-width="1" r="16"></circle></clipPath><circle stroke-width="1" fill="white" stroke="white" cx="132" cy="76" r="15"></circle><image preserveAspectRatio="xMidYMid slice" clip-path="url(#{randId})" xlink:href="./images/organizations/facebook.jpg" onclick="openPage(\'{val}\')" x="114" y="58" width="35" height="35" style="cursor: pointer;"></image>'
+
       OrgChart.templates.family_template_1.linkAdjuster =
         {
           fromX: 0,
@@ -270,7 +273,6 @@
         .then(function (x) { return x.json() })
         .then(function (data) {
 
-
           // data = [
           //   {
           //     "id": 1,
@@ -352,6 +354,7 @@
           //     "parentId": 4,
           //     "parentRelId": 2,
           //     "name": "ეზეკი ზიბზიბაძე",
+          //     "toptalUrl": "https://www.toptal.com/resume/ezeki-zibzibadze",
           //     "imageUrl": "./images/people/ezeki-zibzibadze.jpg",
           //     "rels": [
           //       {
@@ -408,6 +411,8 @@
               img_2: "img3",
               img_3: "img4",
               img_4: "img5",
+              badge_toptal: "toptal",
+              badge_facebook: "facebook",
             },
             nodes,
           })
@@ -435,6 +440,10 @@
         }
       }
 
+      const badge = {
+        toptal: node.toptalUrl || undefined,
+        facebook: node.facebookUrl || undefined,
+      }
 
       // start analyze
       if (!hasRels) {
@@ -443,13 +452,16 @@
           : ''
         )
 
-        return {
-          id: getNextId(),
-          pid: parentId,
-          tags: [tag1],
-          name1: node.name,
-          img1: getImageUrl(node.imageUrl, node.isFemale),
-        }
+        return Object.assign(
+          {
+            id: getNextId(),
+            pid: parentId,
+            tags: [tag1],
+            name1: node.name,
+            img1: getImageUrl(node.imageUrl, node.isFemale),
+          },
+          badge,
+        )
       }
 
       if (node.rels.length > 4) {
@@ -528,13 +540,15 @@
           break
       }
 
+
       return Object.assign(
         {
           id,
           pid: parentId,
           tags: [tag],
         },
-        people
+        people,
+        badge,
       )
     }
 
@@ -548,6 +562,10 @@
         ? './images/default/female.jpg'
         : './images/default/male.gif'
       )
+    }
+
+    function openPage(url) {
+      window.open(url)
     }
 
     lastId = 1
