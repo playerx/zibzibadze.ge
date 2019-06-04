@@ -273,119 +273,7 @@
         .then(function (x) { return x.json() })
         .then(function (data) {
 
-          // data = [
-          //   {
-          //     "id": 1,
-          //     "name": "ეზეკია ზიბზიბაძე",
-          //     "rels": [
-          //       {
-          //         "name": "ელენა"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 2,
-          //     "parentId": 1,
-          //     "name": "რეზო ზიბზიბაძე",
-          //     "rels": [
-          //       {
-          //         "name": "ლიანა"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 3,
-          //     "parentId": 1,
-          //     "name": "შოთა ზიბზიბაძე",
-          //     "rels": [
-          //       {
-          //         "name": "მარიკო"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 4,
-          //     "parentId": 1,
-          //     "name": "ვაჟა ზიბზიბაძე",
-          //     "rels": [
-          //       {
-          //         "name": "ფაციკო"
-          //       },
-          //       {
-          //         "name": "ჟუჟუნა ირემაშვილი"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 5,
-          //     "parentId": 2,
-          //     "name": "რამაზი ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 6,
-          //     "parentId": 2,
-          //     "isFemale": true,
-          //     "name": "მარინა ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 7,
-          //     "parentId": 3,
-          //     "name": "საშა ზიბზიბაძე",
-          //     "rels": [
-          //       {
-          //         "name": "კარინა"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 8,
-          //     "parentId": 4,
-          //     "parentRelId": 1,
-          //     "name": "თემური ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 9,
-          //     "parentId": 4,
-          //     "parentRelId": 1,
-          //     "isFemale": true,
-          //     "name": "ნანა ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 10,
-          //     "parentId": 4,
-          //     "parentRelId": 2,
-          //     "name": "ეზეკი ზიბზიბაძე",
-          //     "toptalUrl": "https://www.toptal.com/resume/ezeki-zibzibadze",
-          //     "imageUrl": "./images/people/ezeki-zibzibadze.jpg",
-          //     "rels": [
-          //       {
-          //         "name": "სალომე მინდიაშვილი"
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     "id": 11,
-          //     "parentId": 4,
-          //     "parentRelId": 2,
-          //     "isFemale": true,
-          //     "name": "ელენე ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 12,
-          //     "parentId": 7,
-          //     "name": "ალექსანდრე ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 13,
-          //     "parentId": 7,
-          //     "name": "შოთა ზიბზიბაძე"
-          //   },
-          //   {
-          //     "id": 14,
-          //     "parentId": 3,
-          //     "name": "სერიოჟა ზიბზიბაძე"
-          //   }
-          // ]
+          // data = []
 
           document.getElementById('mainSection').className = "loaded"
 
@@ -393,6 +281,7 @@
             .map(function (x) { return mapTreeNode(x, data) })
             .filter(function (x) { return !!x }) // ignore nulls (rels > 4)
 
+          console.log(nodes)
           // Create chart
           var chart = new OrgChart(document.getElementById("tree"), {
             tags,
@@ -461,7 +350,7 @@
 
         return Object.assign(
           {
-            id: getNextId(),
+            id: node.id,
             pid: parentId,
             tags: [tag1],
             name1: node.name,
@@ -476,8 +365,6 @@
         return null
       }
 
-
-      const id = getNextId()
 
       const tag = 'family_template_' + (node.rels.length + 1) +
         ((parentLength > 2)
@@ -550,7 +437,7 @@
 
       return Object.assign(
         {
-          id,
+          id: node.id,
           pid: parentId,
           tags: [tag],
         },
@@ -572,11 +459,6 @@
 
     function openPage(url) {
       window.open(url)
-    }
-
-    lastId = 1
-    function getNextId() {
-      return (lastId++).toString()
     }
 
   </script>
