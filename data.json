@@ -150,7 +150,8 @@
     "parentId": 4,
     "parentRelId": 2,
     "isFemale": true,
-    "name": "ელენე ზიბზიბაძე"
+    "name": "ელენე ზიბზიბაძე",
+    "imageUrl": "./images/people/ellen-zibzibadze.jpg"
   },
   {
     "id": 12,
