@@ -49,3 +49,10 @@ sample:
 
 ## Limitations
 * Currently there is one limitation, man (or woman) can have registered max 4 relations :)
+
+## Local Development
+For Testing locally please run
+
+`npm i` (once) and `node dev`
+
+Note: you will need [nodejs](https://nodejs.org) to be installed
