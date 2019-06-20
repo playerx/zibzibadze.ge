@@ -275,7 +275,7 @@
         return { [x.toString()]: { template: x } }
       }).reduce(function (a, b) { return Object.assign(a, b) })
 
-      const url = '/data.json'
+      const url = './data.json'
 
       fetch(url)
         .then(function (x) { return x.json() })
